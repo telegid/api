@@ -1,6 +1,6 @@
 import {loadFile} from '../src/loadFile';
 import {join} from 'path';
-import {readdir} from '../src/promisifiedFunctions';
+import {readdir} from './promisifiedFunctions';
 
 const generateDays = async () => {
 

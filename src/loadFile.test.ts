@@ -1,7 +1,7 @@
 import {loadFile} from './loadFile';
 import {join} from 'path';
 import {filesDays} from './loadFile.fixtures';
-import {readdir} from './promisifiedFunctions';
+import {readdir} from '../utils/promisifiedFunctions';
 
 test('basic', async () => {
 

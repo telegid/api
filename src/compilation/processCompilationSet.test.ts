@@ -1,5 +1,5 @@
 import {processCompilationSet} from './processCompilationSet';
-import {gcMovies} from './compilation/gcMovies';
+import {gcMovies} from './gcMovies';
 
 test('processCompilationSet', () => {
     const result = processCompilationSet(gcMovies);

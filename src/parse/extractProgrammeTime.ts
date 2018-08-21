@@ -1,5 +1,5 @@
-import {isHours} from '../utils/isHours';
-import {isMinutes} from '../utils/isMinutes';
+import {isHours} from '../../utils/isHours';
+import {isMinutes} from '../../utils/isMinutes';
 
 export const extractProgrammeTime = (programmeString: string): { time: string, remainingPart: string } => {
 

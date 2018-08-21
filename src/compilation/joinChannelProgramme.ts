@@ -1,4 +1,4 @@
-import {IProgramme} from './interfaces/IProgramme';
+import {IProgramme} from '../interfaces/IProgramme';
 
 export const joinChannelProgramme = (dayProgrammeList: IProgramme[]) =>
     dayProgrammeList.reduce((collectedString: string, programmeLine, currentIndex: number): string => {
