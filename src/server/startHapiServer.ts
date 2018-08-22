@@ -1,6 +1,8 @@
 import {Server} from 'hapi';
 import {Client} from 'pg';
 import {getChannelHandler} from './handlers/getChannelHandler';
+import {getAvailableDatesHandler} from './handlers/getAvailableDatesHandler';
+import {getChannelsListHandler} from './handlers/getChannelsListHandler';
 
 export const startHapiServer = async (client: Client) => {
 
@@ -12,15 +14,28 @@ export const startHapiServer = async (client: Client) => {
     serverInstance.route({
         method: 'GET',
         path: '/channel',
+        options: {
+            cors: true
+        },
         handler: (request, h) => getChannelHandler(request, h, client)
     });
 
     serverInstance.route({
         method: 'GET',
-        path: '/stats',
-        handler: (request, h) => {
-            return '123';
-        }
+        path: '/channels',
+        options: {
+            cors: true
+        },
+        handler: (request, h) => getChannelsListHandler(request, h, client)
+    });
+
+    serverInstance.route({
+        method: 'GET',
+        path: '/dates',
+        options: {
+            cors: true
+        },
+        handler: (request, h) => getAvailableDatesHandler(request, h, client)
     });
 
     try {
