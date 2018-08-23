@@ -46,14 +46,13 @@ export const startHapiServer = async (client: Client) => {
 
     try {
         await serverInstance.start();
-        setInterval(() => {
-            serverInstance.publish('/sync/status', {id: 5, status: new Date().getTime()});
-        }, 2000);
 
     } catch (err) {
         console.log(err);
         process.exit(1);
     }
+
+    serverInstance.publish('/sync/status', {id: 5, status: new Date()});
 
     console.log('Server running at:', serverInstance.info.uri);
 };

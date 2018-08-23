@@ -1,9 +1,8 @@
-import {Request, RequestQuery, ResponseToolkit} from 'hapi';
 import {Client} from 'pg';
 
-export const getChannelsListHandler = async (request: Request, h: ResponseToolkit, client: Client) => {
+export const getChannelsListHandler = async (client: Client) => {
     // return request.params.id;
-    const query = request.query as RequestQuery;
+    // const query = request.query as RequestQuery;
 
     const result = await client.query('SELECT id, label FROM channels ORDER BY id');
 
