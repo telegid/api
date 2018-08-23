@@ -5,7 +5,11 @@ export const getChannelsListHandler = async (request: Request, h: ResponseToolki
     // return request.params.id;
     const query = request.query as RequestQuery;
 
-    const result = await client.query('SELECT channel_id FROM channel_raw_content WHERE release_date=$1 ORDER BY channel_id', [query.release_date]);
+    const result = await client.query('SELECT id, label FROM channels ORDER BY id');
 
-    return result.rows.map((row) => row.channel_id);
+    return result.rows.reduce((accumulator, currentItem) => {
+            accumulator[currentItem.id] = currentItem.label;
+            return accumulator;
+        },
+        {});
 };
