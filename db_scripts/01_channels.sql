@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS channel_settings (
+CREATE TABLE IF NOT EXISTS channels (
     id varchar,
 
     label varchar NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS channel_settings (
 );
 
 
-INSERT INTO channel_settings (id, label) VALUES
+INSERT INTO channels (id, label) VALUES
 ('1tv', 'Первый'),
 ('2x2', '2X2'),
 ('boets', 'Боец'),
