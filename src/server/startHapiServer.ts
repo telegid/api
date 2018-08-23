@@ -1,24 +1,29 @@
-import {Server} from 'hapi';
 import {Client} from 'pg';
-import {getChannelHandler} from './handlers/getChannelHandler';
 import {getAvailableDatesHandler} from './handlers/getAvailableDatesHandler';
 import {getChannelsListHandler} from './handlers/getChannelsListHandler';
+import * as nes from 'nes';
+import * as hapi from 'hapi';
 
 export const startHapiServer = async (client: Client) => {
 
-    const serverInstance = new Server({
+
+    const serverInstance = new hapi.Server({
         host: 'localhost',
-        port: 8000
+        port: 8000,
     });
 
-    serverInstance.route({
-        method: 'GET',
-        path: '/channel',
-        options: {
-            cors: true
-        },
-        handler: (request, h) => getChannelHandler(request, h, client)
-    });
+    await serverInstance.register(nes);
+
+    /*
+        serverInstance.route({
+            method: 'GET',
+            path: '/channel',
+            options: {
+                cors: true
+            },
+            handler: (request, h) => getChannelHandler(request, h, client)
+        });
+    */
 
     serverInstance.route({
         method: 'GET',
@@ -37,9 +42,14 @@ export const startHapiServer = async (client: Client) => {
         },
         handler: (request, h) => getAvailableDatesHandler(request, h, client)
     });
+    serverInstance.subscription('/sync/status');
 
     try {
         await serverInstance.start();
+        setInterval(() => {
+            serverInstance.publish('/sync/status', {id: 5, status: new Date().getTime()});
+        }, 2000);
+
     } catch (err) {
         console.log(err);
         process.exit(1);
