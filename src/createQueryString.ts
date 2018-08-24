@@ -1,6 +1,7 @@
 import * as querystring from 'querystring';
+import {config as loadConfig} from 'dotenv';
 
-require('dotenv').config();
+loadConfig();
 
 export const createQueryString = (): string => {
     const queryParams = {
